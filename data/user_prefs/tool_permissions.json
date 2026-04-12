@@ -1,7 +1,0 @@
-{
-  "allow_file_search": true,
-  "allow_file_open": true,
-  "allow_folder_open": true,
-  "allow_app_launch": true,
-  "require_confirm_before_launch": true
-}
