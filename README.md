@@ -136,7 +136,8 @@ https://github.com/RVC-Boss/GPT-SoVITS
 ```bash
 python app.py
 ```
+
 ## 文档
 
-- [结构说明](docs/AI语音设计_当前固定版结构图.docx)
-- [结构说明](docs/AI语音设计_当前固定版结构图.md)
+- [AI语音设计｜当前固定版结构图（简版 Word）](docs/architecture/AI语音设计_当前固定版结构图.docx)
+- [AI语音设计｜当前固定版结构图（详细版 Markdown）](docs/architecture/AI语音设计_当前固定版结构图_详细版.md)
