@@ -138,4 +138,4 @@ python app.py
 ```
 ## 文档
 
-- [结构说明](docs/architecture/AI语音设计_当前固定版结构图_简版.md)
+- [结构说明](docs/architecture/AI语音设计_当前固定版结构图_简版.docx)
