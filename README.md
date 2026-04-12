@@ -139,5 +139,5 @@ python app.py
 
 ## 文档
 
-- [AI语音设计｜当前固定版结构图（简版 Word）](docs/architecture/AI语音设计_当前固定版结构图.docx)
-- [AI语音设计｜当前固定版结构图（详细版 Markdown）](docs/architecture/AI语音设计_当前固定版结构图_详细版.md)
+- [AI语音设计｜当前固定版结构图（简版 Word）](docs/AI语音设计_当前固定版结构图.docx)
+- [AI语音设计｜当前固定版结构图（详细版 Markdown）](docs/AI语音设计_当前固定版结构图_详细版.md)
