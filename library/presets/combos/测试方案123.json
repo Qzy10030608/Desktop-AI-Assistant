@@ -1,0 +1,10 @@
+{
+  "name": "测试方案123",
+  "persona": "测试123",
+  "role_id": "",
+  "style_id": "测试_2",
+  "voice_id": "1",
+  "package_id": "咖啡",
+  "model_id": "ollama_qwen3_4b",
+  "output_mode": "text_voice"
+}

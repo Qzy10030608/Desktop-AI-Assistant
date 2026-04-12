@@ -1,0 +1,6 @@
+{
+  "provider": "edge_tts",
+  "default_voice_profile": "default_voice",
+  "fallback_voice_name": "zh-CN-XiaoxiaoNeural",
+  "output_format": ".mp3"
+}

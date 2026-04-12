@@ -1,0 +1,11 @@
+{
+  "gpt_model_path": "G:/大语言模型/voice_ai_test/models/tts/gpt_sovits/taowu/gpt.ckpt",
+  "sovits_model_path": "G:/大语言模型/voice_ai_test/models/tts/gpt_sovits/taowu/sovits.pth",
+  "prompt_text": "你好，我是测试声音。",
+  "prompt_lang": "zh",
+  "text_lang": "zh",
+  "top_k": 5,
+  "top_p": 1.0,
+  "temperature": 1.0,
+  "speed_factor": 1.0
+}

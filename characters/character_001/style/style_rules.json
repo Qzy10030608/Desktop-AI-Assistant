@@ -1,0 +1,10 @@
+{
+  "use_natural_spoken_chinese": true,
+  "avoid_robotic_tone": true,
+  "avoid_over_explaining": true,
+  "allow_light_personality": true,
+  "allow_catchphrases": true,
+  "allow_modal_particles": true,
+  "avoid_repeated_openings": true,
+  "avoid_excessive_exclamation": true
+}

@@ -1,0 +1,12 @@
+{
+  "id": "测试",
+  "name": "测试",
+  "description": "",
+  "scene": "daily",
+  "emotion": "gentle",
+  "speed": "slow",
+  "pause": "medium",
+  "intonation": "normal",
+  "emphasis": "start",
+  "reference_text": ""
+}

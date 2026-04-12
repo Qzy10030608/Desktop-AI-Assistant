@@ -1,0 +1,10 @@
+{
+  "backend": "edge",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "scene": "daily",
+  "emotion": "gentle",
+  "speed": "slow",
+  "pause": "medium",
+  "intonation": "normal",
+  "emphasis": "start"
+}

@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "scope": "next_1_turn",
+  "remaining_turns": 0,
+  "tone_hint": "",
+  "length_hint": "",
+  "catchphrase_boost": false,
+  "notes": ""
+}

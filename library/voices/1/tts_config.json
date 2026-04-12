@@ -1,0 +1,11 @@
+{
+  "backend": "gpt_sovits",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "scene": "daily",
+  "emotion": "lively",
+  "speed": "slow",
+  "pause": "high",
+  "intonation": "strong",
+  "emphasis": "start",
+  "emotion_strength": "medium"
+}

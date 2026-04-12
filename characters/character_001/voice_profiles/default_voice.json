@@ -1,0 +1,21 @@
+{
+  "id": "default_voice",
+  "name": "默认语音",
+  "enabled": true,
+
+  "provider": "edge_tts",
+  "voice_name": "zh-CN-XiaoxiaoNeural",
+
+  "speed": "+0%",
+  "pitch": "+0Hz",
+  "volume": "+0%",
+
+  "use_role_reference_audio": false,
+  "reference_audio": "characters/character_001/voice/ref.wav",
+
+  "tags": [
+    "default",
+    "female",
+    "soft"
+  ]
+}

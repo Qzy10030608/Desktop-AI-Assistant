@@ -1,0 +1,12 @@
+{
+  "id": "soft_voice",
+  "name": "1",
+  "description": "",
+  "scene": "daily",
+  "emotion": "gentle",
+  "speed": "normal",
+  "pause": "medium",
+  "intonation": "normal",
+  "emphasis": "natural",
+  "reference_text": ""
+}

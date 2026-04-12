@@ -1,0 +1,20 @@
+{
+  "id": "stream_voice",
+  "name": "主播语音",
+  "enabled": true,
+
+  "provider": "edge_tts",
+  "voice_name": "zh-CN-XiaoxiaoNeural",
+
+  "speed": "+8%",
+  "pitch": "+10Hz",
+  "volume": "+5%",
+
+  "use_role_reference_audio": false,
+  "reference_audio": "characters/character_001/voice/ref.wav",
+
+  "tags": [
+    "streamer",
+    "bright"
+  ]
+}

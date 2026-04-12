@@ -1,0 +1,39 @@
+{
+  "id": "default",
+  "name": "默认风格",
+  "enabled": true,
+
+  "tone": {
+    "warmth": 0.65,
+    "playfulness": 0.35,
+    "seriousness": 0.55,
+    "softness": 0.50
+  },
+
+  "expression": {
+    "sentence_length": "medium",
+    "verbosity": "medium",
+    "emoji_allowed": false,
+    "modal_particle_level": "low",
+    "catchphrase_level": "low"
+  },
+
+  "conversation": {
+    "prefer_direct_answer": true,
+    "prefer_explanation": true,
+    "prefer_companionship": false,
+    "prefer_question_back": false
+  },
+
+  "limits": {
+    "max_paragraphs": 4,
+    "max_sentences_per_paragraph": 4,
+    "avoid_repetition": true
+  },
+
+  "overrides": {
+    "force_short_reply": false,
+    "force_gentle_tone": false,
+    "force_streamer_style": false
+  }
+}

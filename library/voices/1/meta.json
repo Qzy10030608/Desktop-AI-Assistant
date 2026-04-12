@@ -1,0 +1,14 @@
+{
+  "id": "1",
+  "name": "测试2",
+  "description": "",
+  "scene": "daily",
+  "emotion": "lively",
+  "emotion_strength": "medium",
+  "speed": "slow",
+  "pause": "high",
+  "intonation": "strong",
+  "emphasis": "start",
+  "reference_text": "",
+  "backend": "gpt_sovits"
+}

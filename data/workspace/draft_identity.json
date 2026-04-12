@@ -1,0 +1,7 @@
+{
+  "name": "测试方案",
+  "role_id": "",
+  "model_id": "ollama_qwen3_4b",
+  "package_id": "taowu",
+  "output_mode": "text_voice"
+}
