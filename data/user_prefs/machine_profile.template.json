@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "startup": {
+    "auto_detect_engines": true,
+    "last_startup_check_at": "",
+    "last_startup_status": "unknown"
+  },
+  "ollama": {
+    "enabled": true,
+    "provider": "ollama",
+    "host": "http://localhost:11434",
+    "last_health_ok": false,
+    "last_error": ""
+  },
+  "gpt_sovits": {
+    "enabled": true,
+    "root_dir": "",
+    "python_exe": "",
+    "host": "127.0.0.1",
+    "port": 9880,
+    "api_script": "api_v2.py",
+    "tts_config": "GPT_SoVITS/configs/tts_infer.yaml",
+    "last_health_ok": false,
+    "last_error": "",
+    "recent_valid_root_dirs": []
+  },
+  "llm": {
+    "preferred_provider": "ollama",
+    "fallback_provider": "ollama"
+  },
+  "desktop": {
+    "vscode_path": "",
+    "default_project_dir": ""
+  },
+  "search_paths": {
+    "enabled": false,
+    "roots": [],
+    "max_depth": 5
+  }
+}
