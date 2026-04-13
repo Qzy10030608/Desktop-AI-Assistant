@@ -137,22 +137,62 @@ https://github.com/RVC-Boss/GPT-SoVITS
 python app.py
 ```
 
-连接GPT-SoVITS注意：
-  "\data\user_prefs\machine_profile.json"
-"gpt_sovits": {
+## 连接 GPT-SoVITS
+
+首次使用外部 GPT-SoVITS 前，请先在：
+
+`data/user_prefs/machine_profile.json`
+
+中配置 `gpt_sovits` 信息。
+
+### 配置示例
+
+```json
+{
+  "gpt_sovits": {
     "enabled": true,
-    "root_dir": "（你的GPT_SoVITS地址）",
-    "python_exe": "（你的GPT_SoVITS的python.exe地址）",
+    "root_dir": "GPT-SoVITS 根目录",
+    "python_exe": "GPT-SoVITS 环境中的的python.exe",
     "host": "127.0.0.1",
     "port": 9880,
     "api_script": "api_v2.py",
     "tts_config": "GPT_SoVITS/configs/tts_infer.yaml",
     "last_health_ok": true,
     "last_error": "",
-    "recent_valid_root_dirs": [（你的GPT_SoVITS地址）
-        ""
+    "recent_valid_root_dirs": [
+      "最近有效的 GPT-SoVITS 根目录记录"
     ]
-  },
+  }
+}
+```
+
+### 字段说明
+
+- `enabled`：是否启用 GPT-SoVITS
+- `root_dir`：GPT-SoVITS 根目录
+- `python_exe`：GPT-SoVITS 环境中的 Python 可执行文件
+- `host`：本地服务地址
+- `port`：本地服务端口
+- `api_script`：启动脚本，通常为 `api_v2.py`
+- `tts_config`：TTS 推理配置文件路径
+- `last_health_ok`：上一次健康检查状态
+- `last_error`：上一次错误信息
+- `recent_valid_root_dirs`：最近有效的 GPT-SoVITS 根目录记录
+
+### 启动示例
+
+进入 GPT-SoVITS 目录后运行：
+
+```bash
+runtime/python.exe api_v2.py -a 127.0.0.1 -p 9880
+```
+
+### 注意
+
+- `root_dir` 和 `python_exe` 必须改成你自己电脑上的实际路径
+- 如果使用的是其他 Python 环境，也可以替换为对应的 `python.exe`
+- 启动成功后，接口通常为：`http://127.0.0.1:9880`
+- 
 ## 文档
 
 - [AI语音设计｜当前固定版结构图（简版 Word）](docs/AI语音设计_当前固定版结构图.docx)
