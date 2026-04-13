@@ -137,6 +137,22 @@ https://github.com/RVC-Boss/GPT-SoVITS
 python app.py
 ```
 
+连接GPT-SoVITS注意：
+  "\data\user_prefs\machine_profile.json"
+"gpt_sovits": {
+    "enabled": true,
+    "root_dir": "（你的GPT_SoVITS地址）",
+    "python_exe": "（你的GPT_SoVITS的python.exe地址）",
+    "host": "127.0.0.1",
+    "port": 9880,
+    "api_script": "api_v2.py",
+    "tts_config": "GPT_SoVITS/configs/tts_infer.yaml",
+    "last_health_ok": true,
+    "last_error": "",
+    "recent_valid_root_dirs": [（你的GPT_SoVITS地址）
+        ""
+    ]
+  },
 ## 文档
 
 - [AI语音设计｜当前固定版结构图（简版 Word）](docs/AI语音设计_当前固定版结构图.docx)
