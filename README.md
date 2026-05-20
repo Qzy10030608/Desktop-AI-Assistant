@@ -18,6 +18,7 @@
 - [TTS 与 GPT-SoVITS 配置](#tts-与-gpt-sovits-配置)
 - [ASR / 语音输入配置](#asr--语音输入配置)
 - [桌面连接与安全边界](#桌面连接与安全边界)
+- [VM 测试连接](#vm-测试连接)
 - [工程目录结构](#工程目录结构)
 - [需要本机生成或配置的内容](#需要本机生成或配置的内容)
 - [GitHub 上传边界](#github-上传边界)
@@ -405,9 +406,39 @@ QinRuntimeService：结构化任务入口
    ├─ GIT_UPLOAD_BOUNDARY.md      # GitHub 上传边界说明
    └─ DESKTOP_QIN_GOVERNANCE.md   # 秦治理链、三省六部、权限协议说明
 ```
+## VM 测试连接说明
 
+本项目的桌面连接能力支持 Sandbox、VM、Host 三种执行出口。其中 VM 用于在虚拟机中进行真实动作测试，避免在宿主机上直接执行高风险操作。
+
+VM 测试环境由独立仓库维护：
+
+- VM Agent / AI_VM_TEST 仓库：[Qzy10030608/AI_VM_TEST](https://github.com/Qzy10030608/AI_VM_TEST)
+
+VM Agent 运行在虚拟机内部，作为“小助手 Demo”的薄连接器和薄执行器。它只接收来自 Host 小助手的结构化指令，在虚拟机内部执行文件区或软件区动作，并返回标准 receipt 回执。
+
+VM Agent 不负责自然语言理解，也不负责最终权限判断。所有来自语音、文字或 UI 的桌面动作，都必须先在 Host 小助手中形成结构化 desktop task，并经过秦治理链审议后，才会由工部 VM Adapter 转发给 VM Agent。
+
+简化连接链路如下：
+
+```
+```text
+用户文字 / 语音 / UI 操作
+  ↓
+小助手 Host 主程序
+  ↓
+天庭连接桥接与目标整理
+  ↓
+秦治理链：中书省 / 门下省 / 尚书省
+  ↓
+工部 VM Adapter
+  ↓
+虚拟机内 VM Agent
+  ↓
+VM 文件区 / VM 软件区执行
+  ↓
+receipt 回执 → 御史台记录 / UI 展示
 ---
-
+```
 ## 需要本机生成或配置的内容
 
 以下内容属于本机运行态或个人配置，不应上传到 GitHub：
@@ -421,7 +452,8 @@ QinRuntimeService：结构化任务入口
 | `models/tts/` | GPT-SoVITS 权重和参考素材 | 不上传。 |
 | `agent_config.json` | 本机或 VM Agent 真实边界配置 | 不上传真实配置，只上传模板。 |
 | `temp/` | 临时音频、临时结果 | 不上传。 |
-
+```
+```
 ---
 
 ## GitHub 上传边界
@@ -440,14 +472,15 @@ QinRuntimeService：结构化任务入口
 
 ## 相关文档
 
+```markdown
 | 文档 | 说明 |
 |---|---|
 | [docs/DESKTOP_QIN_GOVERNANCE.md](docs/DESKTOP_QIN_GOVERNANCE.md) | 桌面连接、秦治理链、三省六部、权限状态、协议 schema。 |
 | [docs/GIT_UPLOAD_BOUNDARY.md](docs/GIT_UPLOAD_BOUNDARY.md) | GitHub 上传边界、本机运行数据排除规则。 |
-| `docs/VM_AGENT*.md`（如后续添加） | VM Agent 安装、启动、接口和测试命令。 |
-
+| [docs/VM.md](docs/VM.md) | VM Agent 连接、虚拟机测试出口、文件区/软件区动作和测试命令。 |
+| [AI_VM_TEST](https://github.com/Qzy10030608/AI_VM_TEST) | 独立 VM Agent 仓库，用于虚拟机内真实动作测试。 |
 ---
-
+```
 ## 开发状态
 
 当前版本处于 Demo 工程整理和桌面连接测试阶段。
