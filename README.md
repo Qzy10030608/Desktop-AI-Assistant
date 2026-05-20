@@ -452,10 +452,11 @@ receipt 回执 → 御史台记录 / UI 展示
 | `models/tts/` | GPT-SoVITS 权重和参考素材 | 不上传。 |
 | `agent_config.json` | 本机或 VM Agent 真实边界配置 | 不上传真实配置，只上传模板。 |
 | `temp/` | 临时音频、临时结果 | 不上传。 |
-```
+
 ```
 ---
 
+```
 ## GitHub 上传边界
 
 上传前必须检查：
@@ -472,7 +473,7 @@ receipt 回执 → 御史台记录 / UI 展示
 
 ## 相关文档
 
-```markdown
+markdown
 | 文档 | 说明 |
 |---|---|
 | [docs/DESKTOP_QIN_GOVERNANCE.md](docs/DESKTOP_QIN_GOVERNANCE.md) | 桌面连接、秦治理链、三省六部、权限状态、协议 schema。 |
@@ -480,7 +481,7 @@ receipt 回执 → 御史台记录 / UI 展示
 | [docs/VM.md](docs/VM.md) | VM Agent 连接、虚拟机测试出口、文件区/软件区动作和测试命令。 |
 | [AI_VM_TEST](https://github.com/Qzy10030608/AI_VM_TEST) | 独立 VM Agent 仓库，用于虚拟机内真实动作测试。 |
 ---
-```
+
 ## 开发状态
 
 当前版本处于 Demo 工程整理和桌面连接测试阶段。
