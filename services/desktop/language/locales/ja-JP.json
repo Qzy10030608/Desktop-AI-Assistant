@@ -1,0 +1,224 @@
+{
+  "schema_version": "desktop_language_profile_v1",
+  "locale": "ja-JP",
+  "command": {
+    "open_verbs": [
+      "開く",
+      "起動",
+      "実行",
+      "開いて"
+    ],
+    "close_verbs": [
+      "閉じる",
+      "終了",
+      "止める",
+      "閉じて"
+    ],
+    "polite_fillers": [
+      "お願い",
+      "ください",
+      "して",
+      "を"
+    ],
+    "generic_app_words": [
+      "アプリ",
+      "ソフト",
+      "プログラム",
+      "ブラウザ",
+      "メモ帳",
+      "ペイント",
+      "電卓"
+    ],
+    "generic_file_words": [
+      "ファイル",
+      "文書",
+      "資料",
+      "レポート",
+      "pdf",
+      "docx",
+      "txt"
+    ],
+    "connection_words": {
+      "enable": [
+        "デスクトップ接続をオン",
+        "デスクトップ接続を開始"
+      ],
+      "disable": [
+        "デスクトップ接続をオフ",
+        "デスクトップ接続を切断"
+      ]
+    },
+    "chat_hint_words": [
+      "なぜ",
+      "どうして",
+      "説明",
+      "どう思う",
+      "書いて",
+      "分析"
+    ],
+    "math_chat_words": [
+      "いくつ",
+      "何"
+    ],
+    "unclear_patterns": [
+      "それをやって",
+      "なんとかして",
+      "任せる"
+    ],
+    "web_words": [
+      "検索",
+      "調べて",
+      "ウェブ",
+      "ページを開く"
+    ],
+    "developer_words": [
+      "puzzleを表示",
+      "dry-runを表示",
+      "taskを表示",
+      "pendingを見る",
+      "sandboxに切り替え",
+      "vmに切り替え"
+    ]
+  },
+  "system_skill": {
+    "datetime": {
+      "time_queries": [
+        "今何時",
+        "今何時ですか",
+        "現在時刻",
+        "時間を教えて"
+      ],
+      "date_queries": [
+        "今日は何日",
+        "今日の日付",
+        "現在の日付"
+      ],
+      "weekday_queries": [
+        "今日は何曜日",
+        "何曜日",
+        "曜日を教えて"
+      ]
+    },
+    "weather": {
+      "queries": [
+        "天気",
+        "雨が降る",
+        "暑い"
+      ]
+    },
+    "calendar": {
+      "queries": [
+        "カレンダー",
+        "予定",
+        "スケジュール"
+      ]
+    }
+  },
+  "pending": {
+    "confirm_words": [
+      "はい",
+      "そう",
+      "合ってる",
+      "開いて",
+      "確認",
+      "それです",
+      "お願いします",
+      "ok"
+    ],
+    "cancel_words": [
+      "キャンセル",
+      "いいえ",
+      "違う",
+      "やめて",
+      "不要"
+    ],
+    "choice_words": [
+      "一番目",
+      "二番目",
+      "三番目",
+      "1",
+      "2",
+      "3",
+      "最初",
+      "クライアント",
+      "ゲーム",
+      "ランチャー",
+      "バックグラウンド"
+    ]
+  },
+  "reply": {
+    "desktop.generic.done": "デスクトップ操作が完了しました。",
+    "desktop.generic.failed": "デスクトップ操作を完了できませんでした。",
+    "desktop.generic.blocked": "デスクトップ操作はブロックされました。",
+    "desktop.generic.dry_run": "テスト結果を生成しました。実際のデスクトップ操作は実行していません。",
+    "desktop.generic.candidate_ready": "候補が見つかりました。次の処理を待っています。",
+    "desktop.generic.pending_choice": "複数の候補が見つかりました。1つ選んでください。",
+    "desktop.generic.need_clarification": "続行する前に、もう少し確認が必要です。",
+    "desktop.generic.need_confirmation": "続行するには確認が必要です。",
+    "desktop.generic.choice_resolved": "候補を選択しました。",
+    "desktop.generic.choice_cancelled": "選択をキャンセルしました。",
+    "desktop.generic.choice_invalid": "選択が無効です。もう一度選んでください。",
+    "desktop.generic.choice_ambiguous": "選択が不明確です。番号で選んでください。",
+    "desktop.generic.not_found": "対象が見つかりませんでした。",
+    "desktop.generic.unknown": "デスクトップ操作を処理しました。",
+    "desktop.connection.enabled": "デスクトップ接続を有効にしました。",
+    "desktop.connection.disabled": "デスクトップ接続を無効にしました。",
+    "desktop.connection.not_enabled": "デスクトップ接続が有効になっていないため、実際のデスクトップ操作は実行できません。",
+    "desktop.connection.not_execution_mode": "現在は実行モードではないため、実際のデスクトップ操作はブロックされました。",
+    "desktop.connection.test_mode_only": "現在はテストモードです。テスト結果のみ生成し、実際の操作は実行しません。",
+    "desktop.app.launch.pending_choice": "複数の候補が見つかりました。どれを開くか選んでください。",
+    "desktop.app.launch.need_confirmation": "「{target}」を開きますか？",
+    "desktop.app.launch.need_permission": "「{target}」は見つかりましたが、まだ実行許可がありません。ソフトウェア領域で権限を設定してください。",
+    "desktop.app.launch.not_found": "ソフトウェア管理領域で「{target}」の実行対象が見つかりませんでした。",
+    "desktop.app.launch.need_clarification": "どのソフトウェアを開くか判断できません。もう少し具体的に言うか、候補から選んでください。",
+    "desktop.app.launch.candidate_ready": "ソフトウェア対象を特定しました。Qin チェーンで審査します。",
+    "desktop.app.launch.request_sent": "Host に起動リクエストを送りました：{target}。",
+    "desktop.app.launch.done": "ソフトウェア起動リクエストを送信しました：{target}。",
+    "desktop.app.launch.failed": "ソフトウェアの起動リクエストを完了できませんでした：{target}。",
+    "desktop.app.launch.blocked": "ソフトウェアの起動はブロックされました。",
+    "desktop.app.launch.permission_unset": "対象はまだ実行を許可されていません。ソフトウェア管理エリアで権限を設定してください。",
+    "desktop.app.close.plan_ready": "ソフトウェア終了計画を生成しました。",
+    "desktop.app.close.pending_choice": "終了対象の候補が複数見つかりました。1つ選んでください。",
+    "desktop.app.close.need_confirmation": "終了対象が不確実です。「{target}」を閉じますか？",
+    "desktop.app.close.choice_resolved": "終了する対象を選択しました。",
+    "desktop.app.close.choice_cancelled": "終了操作をキャンセルしました。",
+    "desktop.app.close.choice_invalid": "終了対象の選択が無効です。もう一度選んでください。",
+    "desktop.app.close.not_found": "実行中の対象ソフトウェアが見つかりませんでした。",
+    "desktop.app.close.blocked": "ソフトウェアの終了はブロックされました。",
+    "desktop.app.close.done": "ソフトウェアを終了しました：{target}。",
+    "desktop.app.close.failed": "ソフトウェアの終了に失敗しました：{target}。",
+    "desktop.app.close.need_heibingtai": "ソフトウェアを閉じるには黒冰台の対象情報が必要です。直接終了は拒否されました。",
+    "desktop.file.open.pending_choice": "複数のファイル候補が見つかりました。どれを開くか選んでください。",
+    "desktop.file.open.need_confirmation": "確認です。「{target}」を開きますか？",
+    "desktop.file.open.need_permission": "「{target}」は見つかりましたが、開く権限がありません。ファイル管理エリアで権限を設定してください。",
+    "desktop.file.open.not_found": "「{target}」に対応するファイルが見つかりませんでした。名前を確認するか、ファイル一覧を更新してください。",
+    "desktop.file.open.done": "ファイルを開くリクエストを送信しました：{target}。",
+    "desktop.file.open.failed": "ファイルを開けませんでした：{target}。",
+    "desktop.file.close.pending_choice": "閉じる可能性のあるファイルが複数見つかりました。1つ選んでください。",
+    "desktop.file.close.need_confirmation": "どのファイルを閉じるか不確実です。「{target}」を閉じますか？",
+    "desktop.file.close.not_found": "開いている対象ファイルが見つかりませんでした。",
+    "desktop.file.close.done": "ファイルを閉じました：{target}。",
+    "desktop.file.close.failed": "ファイルを閉じられませんでした：{target}。",
+    "desktop.folder.open.pending_choice": "複数のフォルダー候補が見つかりました。どれを開くか選んでください。",
+    "desktop.folder.open.not_found": "対応するフォルダーが見つかりませんでした。名前を確認するか、一覧を更新してください。",
+    "desktop.folder.open.done": "フォルダーを開くリクエストを送信しました：{target}。",
+    "desktop.folder.open.failed": "フォルダーを開けませんでした：{target}。",
+    "desktop.folder.close.pending_choice": "閉じる可能性のあるフォルダーウィンドウが複数見つかりました。1つ選んでください。",
+    "desktop.folder.close.not_found": "開いている対象フォルダーウィンドウが見つかりませんでした。",
+    "desktop.folder.close.done": "フォルダーウィンドウを閉じました：{target}。",
+    "desktop.folder.close.failed": "フォルダーウィンドウを閉じられませんでした：{target}。",
+    "desktop.web.reserved": "Web検索機能は予約済みで、現在のバージョンではまだ有効ではありません。",
+    "desktop.ui.action.confirm_open": "開くことを確認",
+    "desktop.ui.action.cancel": "キャンセル",
+    "desktop.ui.action.choose_first": "最初を選択",
+    "desktop.capture.reserved": "スクリーンショットと録画機能は予約済みですが、現在のバージョンではまだ有効ではありません。",
+    "desktop.system.datetime.done": "{result}",
+    "desktop.system.weather.not_configured": "天気機能はまだ接続されていません。先に既定の都市または天気サービスを設定してください。",
+    "desktop.system.calendar.need_permission": "カレンダーの読み取りには先に認可が必要です。"
+  },
+  "ui": {
+    "desktop.ui.action.confirm_open": "開く",
+    "desktop.ui.action.cancel": "キャンセル",
+    "desktop.ui.action.choose_first": "最初を選択"
+  }
+}

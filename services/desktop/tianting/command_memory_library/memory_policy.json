@@ -1,0 +1,10 @@
+{
+  "schema_version": "command_memory_policy_v1",
+  "allow_memory_as_permission": false,
+  "allow_memory_as_backend_decision": false,
+  "allow_llm_hint_as_execution_target": false,
+  "expose_debug_to_normal_user": false,
+  "expose_debug_to_developer": true,
+  "session_notes_ttl_seconds": 3600,
+  "learned_candidates_require_confirmation": true
+}

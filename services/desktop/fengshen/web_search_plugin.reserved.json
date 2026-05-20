@@ -1,0 +1,11 @@
+{
+  "plugin_id": "web_search",
+  "name": "Reserved Web/Search Plugin",
+  "capability_type": "web_search",
+  "enabled": false,
+  "generation": "reserved_for_v2",
+  "requires_network": true,
+  "requires_qin_review": true,
+  "entry_point": "",
+  "note": "Web/Search plugin is reserved for V2 and must not run in first stage."
+}

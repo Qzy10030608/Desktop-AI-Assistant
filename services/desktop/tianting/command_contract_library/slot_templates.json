@@ -1,0 +1,37 @@
+{
+  "schema_version": "desktop_slot_templates_v1",
+  "slots": {
+    "target.kind": {
+      "type": "string",
+      "description": "Target kind such as file, app, or desktop_connection."
+    },
+    "target.name_hint": {
+      "type": "string",
+      "description": "Safe fuzzy target name hint from user text."
+    },
+    "target.path_hint": {
+      "type": "string",
+      "description": "Optional user-provided path hint. First stage must not expand it into full search."
+    },
+    "target.app_hint": {
+      "type": "string",
+      "description": "Safe software name hint."
+    },
+    "target.time_hint": {
+      "type": "string",
+      "description": "Recent, yesterday, current, or other contextual time hint."
+    },
+    "target.format_hint": {
+      "type": "string",
+      "description": "File extension or format hint."
+    },
+    "target.identity": {
+      "type": "string",
+      "description": "Contextual identity such as current item or recent item."
+    },
+    "query.choice_index": {
+      "type": "integer",
+      "description": "User choice index for pending candidate continuation."
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "roots": [
+    {
+      "root_id": "project_root",
+      "title": "项目目录",
+      "path_token": "${PROJECT_ROOT}",
+      "enabled": true,
+      "index_enabled": true,
+      "allow_search": true,
+      "allow_open_file": true,
+      "allow_open_folder": true,
+      "allow_read_meta": true
+    },
+    {
+      "root_id": "downloads_root",
+      "title": "下载目录",
+      "path_token": "${DOWNLOADS}",
+      "enabled": false,
+      "index_enabled": false,
+      "allow_search": true,
+      "allow_open_file": true,
+      "allow_open_folder": true,
+      "allow_read_meta": true
+    },
+    {
+      "root_id": "documents_root",
+      "title": "文档目录",
+      "path_token": "${DOCUMENTS}",
+      "enabled": false,
+      "index_enabled": false,
+      "allow_search": true,
+      "allow_open_file": true,
+      "allow_open_folder": true,
+      "allow_read_meta": true
+    }
+  ]
+}

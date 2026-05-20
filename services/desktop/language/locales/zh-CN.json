@@ -1,0 +1,578 @@
+{
+  "schema_version": "desktop_language_profile_v1",
+  "locale": "zh-CN",
+  "command": {
+    "open_verbs": [
+      "打开",
+      "开启",
+      "启动",
+      "运行",
+      "找到并打开"
+    ],
+    "close_verbs": [
+      "关闭",
+      "关掉",
+      "退出",
+      "停止",
+      "关了"
+    ],
+    "polite_fillers": [
+      "请",
+      "帮我",
+      "麻烦",
+      "一下",
+      "帮我把"
+    ],
+    "generic_app_words": [
+      "软件",
+      "程序",
+      "应用",
+      "应用程序",
+      "app"
+    ],
+    "app_hint_words": [
+      "浏览器",
+      "记事本",
+      "画图",
+      "计算器",
+      "代码"
+    ],
+    "generic_file_words": [
+      "文件",
+      "文档",
+      "报告",
+      "说明",
+      "材料",
+      "结构图",
+      "docx",
+      "doc",
+      "pdf",
+      "md",
+      "json",
+      "txt"
+    ],
+    "filesystem": {
+      "drive_suffixes": [
+        "盘"
+      ],
+      "root_words": [
+        "根目录",
+        "根路径",
+        "根文件夹"
+      ],
+      "folder_words": [
+        "文件夹",
+        "目录"
+      ]
+    },
+    "connection_words": {
+      "enable": [
+        "开启桌面连接",
+        "打开桌面连接",
+        "连接电脑",
+        "开启连接"
+      ],
+      "disable": [
+        "关闭桌面连接",
+        "断开桌面连接",
+        "关闭连接",
+        "断开连接"
+      ]
+    },
+    "chat_hint_words": [
+      "为什么",
+      "怎么",
+      "解释",
+      "你觉得",
+      "设计怎么样",
+      "方案合理",
+      "帮我写",
+      "写一份",
+      "分析一下",
+      "说明一下"
+    ],
+    "math_chat_words": [
+      "等于多少",
+      "几加几",
+      "怎么算",
+      "多少呀",
+      "多少啊"
+    ],
+    "unclear_patterns": [
+      "帮我弄一下那个",
+      "处理一下那个",
+      "你看着办",
+      "搞一下",
+      "弄一下",
+      "处理一下"
+    ],
+    "web_words": [
+      "查一下",
+      "搜一下",
+      "搜索",
+      "打开网页",
+      "网页",
+      "网上查",
+      "查查"
+    ],
+    "developer_words": [
+      "显示 puzzle",
+      "显示 dry-run",
+      "显示 task",
+      "显示 task 草案",
+      "查看 pending",
+      "切换 sandbox",
+      "切换 vm",
+      "vm 测试"
+    ],
+    "software_query": {
+      "query_words": [
+        "有没有",
+        "是否有",
+        "在不在",
+        "找一下",
+        "查一下"
+      ],
+      "object_words": [
+        "软件",
+        "程序",
+        "应用",
+        "软件区",
+        "列表"
+      ]
+    },
+    "question_particles": [
+      "吗",
+      "么",
+      "？",
+      "?"
+    ]
+  },
+  "llm_intent_router": {
+    "enabled": true,
+    "use_current_chat_model": true,
+    "model_provider": "",
+    "model_name": "",
+    "model_source": "current_chat_model",
+    "timeout_seconds": 8,
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 0.8,
+    "purpose": "将用户自然语言转换为结构化意图，不直接回答事实，不直接执行动作。",
+    "minimum_policy": {
+      "router_is_not_executor": true,
+      "router_must_not_open_apps": true,
+      "router_must_not_open_files": true,
+      "router_must_not_modify_system": true,
+      "router_must_not_guess_current_time": true,
+      "router_must_not_guess_weather": true,
+      "router_must_not_guess_file_path": true,
+      "router_must_not_guess_exe_path": true,
+      "router_must_not_bypass_permission": true,
+      "router_output_json_only": true
+    },
+    "allowed_routes": [
+      "system_skill",
+      "desktop_command",
+      "chat_reply"
+    ],
+    "allowed_system_skills": [
+      "datetime.read",
+      "weather.open_display",
+      "weather.query",
+      "calendar.read"
+    ],
+    "allowed_desktop_actions": [
+      "app.launch",
+      "app.close",
+      "folder.open",
+      "file.open",
+      "desktop.resolve"
+    ],
+    "route_meaning": {
+      "system_skill": "用户在请求系统能力，例如时间、日期、天气、日程。",
+      "desktop_command": "用户在请求桌面操作，例如打开软件、文件、文件夹。",
+      "chat_reply": "用户在普通聊天、解释、计算、写作或讨论。"
+    },
+    "skill_meaning": {
+      "datetime.read": "读取本机真实时间、日期或星期。",
+      "weather.open_display": "打开天气显示页面，不读取结构化天气数据。",
+      "weather.query": "读取天气数据。当前如果没有天气数据源，应降级为 weather.open_display 或提示未配置。",
+      "calendar.read": "读取日程。当前如果没有授权，应提示需要授权。"
+    },
+    "desktop_action_meaning": {
+      "app.launch": "用户想打开某个软件。",
+      "app.close": "用户想关闭某个软件。",
+      "folder.open": "用户想打开某个文件夹或磁盘路径。",
+      "file.open": "用户想打开某个文件。",
+      "desktop.resolve": "用户想操作桌面对象，但对象类型还不明确，需要后续由记忆、软件区、文件区和证据层判断。"
+    },
+    "thinking_style": {
+      "principle": "望闻问切",
+      "observe": "先观察用户原话、上下文、当前模式。",
+      "listen": "再查询记忆、软件区、文件区、系统能力和已有证据。",
+      "ask": "只有在仍然不确定或存在风险时才询问用户。",
+      "decide": "确认目标后交给对应系统能力或桌面审议链。"
+    },
+    "confidence_policy": {
+      "system_skill_min_confidence": 0.72,
+      "desktop_command_min_confidence": 0.72,
+      "chat_reply_default_confidence": 0.5,
+      "need_clarification_below": 0.55,
+      "prefer_chat_reply_below": 0.45
+    },
+    "fallback_policy": {
+      "on_llm_timeout": "chat_reply",
+      "on_invalid_json": "chat_reply",
+      "on_low_confidence": "chat_reply",
+      "on_unsafe_desktop_action": "desktop.resolve",
+      "on_weather_data_not_configured": "weather.open_display",
+      "on_calendar_permission_missing": "chat_reply"
+    },
+    "weather": {
+      "default_mode": "open_display",
+      "provider": "edge_or_default_browser",
+      "default_location_source": "user_profile_or_system_locale",
+      "fallback_location": "",
+      "allow_open_edge": true,
+      "allow_open_default_browser": true,
+      "allow_query_api": false,
+      "query_api_provider": "",
+      "query_api_configured": false
+    },
+    "output_schema": {
+      "schema_version": "llm_intent_route_v1",
+      "route": "",
+      "skill": "",
+      "action_hint": "",
+      "target_normalized": "",
+      "arguments": {},
+      "confidence": 0.0,
+      "reason": ""
+    },
+    "forbidden_output_fields": [
+      "exe_path",
+      "process_name",
+      "process_names",
+      "backend",
+      "permission_state",
+      "permission_label",
+      "adapter_id",
+      "direct_execute",
+      "os_command"
+    ],
+    "prompt_rules": [
+      "你是意图路由器，不是执行器。",
+      "你只能判断用户意图，并输出 JSON。",
+      "你不能直接回答当前时间、日期、天气、文件路径或软件路径。",
+      "当前时间必须由系统读取。",
+      "天气必须由天气页面或天气数据源读取。",
+      "软件、文件、文件夹必须由记忆、治理区和证据层确认。",
+      "如果用户说法不规范，也要尽量理解其意图。",
+      "如果无法确定目标类型，使用 desktop.resolve。",
+      "如果只是聊天、计算、写作或解释，使用 chat_reply。",
+      "不要输出 Markdown，不要输出解释，只输出 JSON。"
+    ]
+  },
+  "system_skill": {
+    "datetime": {
+      "time_queries": [
+        "现在几点",
+        "几点了",
+        "当前时间"
+      ],
+      "date_queries": [
+        "今天日期",
+        "今天几号",
+        "现在日期"
+      ],
+      "weekday_queries": [
+        "今天星期几",
+        "星期几",
+        "今天周几",
+        "周几"
+      ]
+    },
+    "weather": {
+      "default_mode": "open_display",
+      "provider": "edge_or_default_browser",
+      "default_location_source": "user_profile_or_system_locale",
+      "fallback_location": "",
+      "queries": [
+        "天气",
+        "weather"
+      ],
+      "display_sources": {
+        "edge": "Edge 天气页面",
+        "windows": "Windows 天气显示",
+        "browser": "默认浏览器天气搜索"
+      }
+    },
+    "calendar": {
+      "queries": [
+        "日历",
+        "今天日程",
+        "我的安排",
+        "calendar",
+        "schedule"
+      ]
+    }
+  },
+  "pending": {
+    "confirm_words": [
+      "是",
+      "是的",
+      "对",
+      "对的",
+      "没错",
+      "就是",
+      "打开",
+      "确认",
+      "确认打开",
+      "就是这个",
+      "可以",
+      "嗯",
+      "好的",
+      "好"
+    ],
+    "cancel_words": [
+      "取消",
+      "不是",
+      "不对",
+      "不要",
+      "不要了",
+      "算了",
+      "停止"
+    ],
+    "choice_words": [
+      "第一个",
+      "第二个",
+      "第三个",
+      "1",
+      "2",
+      "3",
+      "打开第一个",
+      "打开第二个",
+      "打开第三个",
+      "最近修改的",
+      "docx那个",
+      "pdf那个",
+      "客户端",
+      "游戏",
+      "游戏那个",
+      "启动器",
+      "后台"
+    ],
+    "choice_index_words": {
+      "1": [
+        "1",
+        "一",
+        "第一个",
+        "第一個",
+        "第1个",
+        "第1個",
+        "第1",
+        "打开第一个",
+        "关闭第一个"
+      ],
+      "2": [
+        "2",
+        "二",
+        "第二个",
+        "第二個",
+        "第2个",
+        "第2個",
+        "第2",
+        "打开第二个",
+        "关闭第二个"
+      ],
+      "3": [
+        "3",
+        "三",
+        "第三个",
+        "第三個",
+        "第3个",
+        "第3個",
+        "第3",
+        "打开第三个",
+        "关闭第三个"
+      ]
+    }
+  },
+  "reply": {
+    "desktop.generic.done": "桌面操作已完成。",
+    "desktop.generic.failed": "桌面操作未能完成。",
+    "desktop.generic.blocked": "桌面操作已被阻止。",
+    "desktop.generic.dry_run": "已生成测试结果，没有执行真实桌面动作。",
+    "desktop.generic.candidate_ready": "已找到候选，等待继续处理。",
+    "desktop.generic.pending_choice": "我找到了多个候选，请选择一个。",
+    "desktop.generic.need_clarification": "我需要再确认一个细节后才能继续。",
+    "desktop.generic.need_confirmation": "我需要你确认后才能继续。",
+    "desktop.pending.deep_search.title": "需要进一步查找",
+    "desktop.pending.deep_search.body": "我还没有找到明确匹配的对象。你可以选择深度查找、刷新软件区、手动选择，或取消。",
+    "desktop.pending.card_ready": "需要你确认后继续。",
+    "desktop.pending.card_fallback": "需要你确认后继续。",
+    "desktop.generic.choice_resolved": "已选择候选。",
+    "desktop.generic.choice_cancelled": "已取消选择。",
+    "desktop.generic.choice_invalid": "选择无效，请重新选择。",
+    "desktop.generic.choice_ambiguous": "选择不够明确，请用编号选择。",
+    "desktop.generic.not_found": "没有找到对应目标。",
+    "desktop.generic.unknown": "桌面操作已处理。",
+    "desktop.generic.last_resort": "我需要再确认一下才能继续。",
+    "desktop.connection.enabled": "桌面连接已开启。",
+    "desktop.connection.disabled": "桌面连接已关闭。",
+    "desktop.connection.not_enabled": "桌面连接尚未开启，当前无法执行真实桌面动作。",
+    "desktop.connection.not_execution_mode": "当前不是执行模式，已阻止真实桌面动作。",
+    "desktop.connection.test_mode_only": "当前处于测试模式，只生成测试结果，不执行真实桌面动作。",
+    "desktop.app.launch.pending_choice": "我找到了多个可能的软件，请选择要打开哪一个。",
+    "desktop.app.launch.need_confirmation": "我不太确定，你是想打开“{target}”吗？",
+    "desktop.app.launch.need_permission": "我找到了“{target}”，但它还没有被授权执行，请先在软件区设置为允许或受限。",
+    "desktop.app.launch.not_found": "我没有在软件治理区找到“{target}”的可执行对象，请先刷新软件列表或在软件区添加它。",
+    "desktop.app.launch.need_clarification": "我不确定你想打开哪个软件，请再说得明确一点，或者从候选中选择。",
+    "desktop.app.launch.candidate_ready": "已匹配到软件对象，正在交给桌面执行审议。",
+    "desktop.app.launch.ready_for_qin": "已找到“{target}”，下一步会进入桌面执行审议。",
+    "desktop.app.launch.request_sent": "已发送软件启动请求：{target}。",
+    "desktop.app.launch.done": "软件启动请求已发送：{target}。",
+    "desktop.app.launch.failed": "软件启动请求未能完成：{target}。",
+    "desktop.app.launch.blocked": "软件启动已被阻止。",
+    "desktop.app.launch.permission_unset": "目标对象尚未授权执行，请先在软件治理区设置权限。",
+    "desktop.app.close.plan_ready": "已生成软件关闭计划。",
+    "desktop.app.close.pending_choice": "我发现多个可能要关闭的对象，请选择一个。",
+    "desktop.app.close.need_confirmation": "请确认是否关闭“{target}”。",
+    "desktop.app.close.choice_resolved": "已选择要关闭的对象。",
+    "desktop.app.close.choice_cancelled": "已取消关闭操作。",
+    "desktop.app.close.choice_invalid": "关闭对象选择无效，请重新选择。",
+    "desktop.app.close.not_found": "没有找到正在运行的目标软件。",
+    "desktop.app.close.blocked": "软件关闭已被阻止。",
+    "desktop.app.close.done": "已关闭：{target}。",
+    "desktop.app.close.failed": "软件关闭失败：{target}。",
+    "desktop.app.close.need_heibingtai": "软件关闭需要精确目标材料，已拒绝直接关闭。",
+    "desktop.software.query.matched": "软件治理区里找到了可能相关的对象：{target}。这里只是查询结果，还没有执行打开操作。",
+    "desktop.software.query.not_found": "我在当前软件治理区里没有找到“{target}”的明显匹配项。你可以先刷新软件列表，或者换一个更完整的名称。",
+    "desktop.file.open.pending_choice": "我找到了多个可能的文件，请选择要打开哪一个。",
+    "desktop.file.open.need_confirmation": "我不太确定，你是想打开“{target}”吗？",
+    "desktop.file.open.need_permission": "我找到了“{target}”，但它还没有被授权打开，请先在文件治理区设置权限。",
+    "desktop.file.open.not_found": "我没有找到“{target}”对应的文件，请确认名称或刷新文件列表。",
+    "desktop.file.open.done": "文件打开请求已发送：{target}。",
+    "desktop.file.open.failed": "文件打开失败：{target}。",
+    "desktop.file.close.pending_choice": "我发现多个可能要关闭的文件，请选择一个。",
+    "desktop.file.close.need_confirmation": "我不太确定要关闭哪个文件，请确认是否关闭“{target}”。",
+    "desktop.file.close.not_found": "没有找到正在打开的目标文件。",
+    "desktop.file.close.done": "文件关闭已完成：{target}。",
+    "desktop.file.close.failed": "文件关闭失败：{target}。",
+    "desktop.folder.open.pending_choice": "我找到了多个可能的文件夹，请选择要打开哪一个。",
+    "desktop.folder.open.need_confirmation": "我不太确定，你是想打开“{target}”这个文件夹吗？",
+    "desktop.folder.open.need_clarification": "我还不能确定你要打开哪个文件夹或盘符。",
+    "desktop.folder.open.need_permission": "我找到了“{target}”，但它还没有被授权打开，请先在文件治理区设置权限。",
+    "desktop.folder.open.root_not_confirmed": "我还没有在当前文件根目录证据里确认到“{target}”，请先确认盘符存在或刷新文件区。",
+    "desktop.folder.open.candidate_ready": "已确认要打开“{target}”，下一步会进入桌面执行审议。",
+    "desktop.folder.open.not_found": "我没有找到对应的文件夹，请确认名称或刷新文件列表。",
+    "desktop.folder.open.done": "文件夹打开请求已发送：{target}。",
+    "desktop.folder.open.failed": "文件夹打开失败：{target}。",
+    "desktop.folder.close.pending_choice": "我发现多个可能要关闭的文件夹窗口，请选择一个。",
+    "desktop.folder.close.need_confirmation": "我不太确定要关闭哪个文件夹窗口，请确认是否关闭“{target}”。",
+    "desktop.folder.close.not_found": "没有找到正在打开的目标文件夹窗口。",
+    "desktop.folder.close.done": "文件夹窗口关闭已完成：{target}。",
+    "desktop.folder.close.failed": "文件夹窗口关闭失败：{target}。",
+    "desktop.web.reserved": "网页搜索功能已预留，当前版本还未启用。",
+    "desktop.capture.reserved": "截图和录屏功能已预留，当前版本还未启用。",
+    "desktop.ui.action.confirm_open": "确认打开",
+    "desktop.ui.action.cancel": "取消",
+    "desktop.ui.action.choose_first": "选择第一个",
+    "desktop.ui.action.choose_second": "选择第二个",
+    "desktop.ui.action.choose_third": "选择第三个",
+    "desktop.ui.action.open": "打开",
+    "desktop.ui.action.close": "关闭",
+    "desktop.ui.action.deep_search": "深度查找",
+    "desktop.ui.action.refresh_software": "刷新软件区",
+    "desktop.ui.action.manual_select": "手动选择",
+    "desktop.ui.prompt.confirm_title": "请确认操作",
+    "desktop.ui.prompt.candidate_title": "请选择目标",
+    "desktop.ui.prompt.select_target": "请选择要处理的目标",
+    "desktop.system.datetime.done": "{result}",
+    "desktop.system.skill_not_supported": "当前还不支持这个系统能力：{skill}",
+    "desktop.system.weather.opened": "已打开天气页面。",
+    "desktop.system.weather.opened_with_location": "已打开“{location}”的天气页面。",
+    "desktop.system.weather.open_failed": "天气页面打开失败：{error}",
+    "desktop.system.weather.query_not_configured": "我已经理解你在问天气，但当前还没有接入天气数据读取；可以先帮你打开天气页面查看。",
+    "desktop.system.weather.need_location": "我需要知道你要查询哪个地区的天气。",
+    "desktop.system.weather.not_configured": "天气数据读取还没有接入，当前可以先打开天气页面查看。",
+    "desktop.system.calendar.need_permission": "日历读取需要先开启授权。",
+    "desktop.app.close.not_enough_material": "我找到了“{target}”，但当前缺少可安全关闭它的窗口或进程材料。请确认它正在运行，或刷新软件区后再试。",
+    "chat.input.empty": "输入文本为空",
+    "chat.busy.in_progress": "当前已有聊天请求正在处理中，请稍候...",
+    "chat.busy.thread_running": "聊天线程仍在运行，请稍候...",
+    "chat.requesting_ai_after_voice": "语音识别完成，正在请求 AI 回复...",
+    "chat.requesting_ai": "正在请求 AI 回复...",
+    "chat.reply.extract_failed": "抱歉，当前没有成功提取到最终回复。",
+    "chat.error.failed": "聊天失败：{error}",
+    "chat.error.failed_multiline": "聊天失败：\n{error}",
+    "desktop.request.processing": "正在处理桌面请求...",
+    "desktop.error.parse_failed": "桌面指令解析失败，请重新描述。",
+    "desktop.generic.choice_resolved_need_confirm": "已选择候选，请再次确认执行。",
+    "desktop.connection.not_enabled_test_only": "桌面连接尚未开启，当前只生成测试结果。",
+    "desktop.connection.mode_unavailable": "无法读取桌面连接状态，已阻止真实桌面动作：{error}",
+    "desktop.qin.submitted": "桌面操作已提交秦链处理。",
+    "desktop.qin.failed_dry_run_fallback": "真实桌面执行链发生错误，已改为生成安全测试结果。",
+    "desktop.qin.failed_blocked": "真实桌面执行链发生错误，已阻止桌面动作。",
+    "ui.messagebox.info_title": "提示",
+    "ui.messagebox.error_title": "错误",
+    "chat.stream.generating": "回复生成中...",
+    "chat.stream.thinking": "正在思考...",
+    "chat.tts.generating": "语音生成中...",
+    "chat.output.voice_only": "（仅语音模式）",
+    "chat.model.ollama_not_connected": "Ollama 未连接：{error}",
+    "chat.model.no_available_ollama_model": "当前没有可用的 Ollama 模型，请先到连接配置页刷新模型列表。",
+    "chat.model.current_model_unavailable": "当前模型不可用：{model}",
+    "chat.model.local_provider_not_ready": "Local provider 还未接入执行器。",
+    "chat.model.api_provider_not_ready": "API provider 还未接入执行器。",
+    "chat.model.unknown_provider": "未知 provider：{provider}",
+    "desktop.jiuchasi.dry_run_suffix": "（当前为纠察司接入测试，未执行真实动作。）",
+    "desktop.jiuchasi.ready_for_qin_dry_run": "纠察司已生成可提交秦链的任务草案，但当前为测试模式，未执行真实动作。",
+    "desktop.exec.open.success": "已打开 {target}。",
+    "desktop.exec.app.launch.sent": "已发送软件启动请求：{target}。",
+    "desktop.exec.permission.denied": "我找到了「{target}」，但当前权限不允许执行。请先在对应治理区设置为允许或受限。",
+    "desktop.exec.windows.access_denied": "我找到了「{target}」，但 Windows 拒绝直接启动它。可能需要管理员权限、正确工作目录，或改用启动器入口。",
+    "desktop.exec.multiple_candidates": "我找到了多个可能的对象，请选择要操作哪一个。",
+    "desktop.exec.cancelled": "已取消本次操作。",
+    "desktop.exec.failed_generic": "桌面操作未能完成。"
+  },
+  "ui": {
+    "desktop.ui.action.confirm_open": "确认打开",
+    "desktop.ui.action.cancel": "取消",
+    "desktop.ui.action.choose_first": "选择第一个",
+    "desktop.ui.action.choose_second": "选择第二个",
+    "desktop.ui.action.choose_third": "选择第三个",
+    "desktop.ui.action.open": "打开",
+    "desktop.ui.action.close": "关闭",
+    "desktop.ui.action.deep_search": "深度查找",
+    "desktop.ui.action.refresh_software": "刷新软件区",
+    "desktop.ui.action.manual_select": "手动选择",
+    "desktop.ui.prompt.confirm_title": "请确认操作",
+    "desktop.ui.prompt.candidate_title": "请选择目标",
+    "desktop.ui.prompt.select_target": "请选择要处理的目标",
+    "desktop.software.alias.button": "习惯名",
+    "desktop.software.alias.dialog.title": "软件习惯名管理",
+    "desktop.software.alias.official_name": "软件正式名",
+    "desktop.software.alias.app_id": "软件 ID",
+    "desktop.software.alias.canonical_app_id": "规范软件 ID",
+    "desktop.software.alias.permission_state": "当前权限",
+    "desktop.software.alias.current_terms": "已绑定习惯名",
+    "desktop.software.alias.add_placeholder": "输入新的习惯名",
+    "desktop.software.alias.add": "添加",
+    "desktop.software.alias.delete_selected": "删除选中",
+    "desktop.software.alias.close": "关闭",
+    "desktop.software.alias.empty_input": "请输入习惯名。",
+    "desktop.software.alias.same_as_title": "这个名称和软件正式名相同，不需要额外添加。",
+    "desktop.software.alias.exists_same_target": "“{term}”已经绑定到这个软件。",
+    "desktop.software.alias.exists_other_target": "“{term}”已经绑定到“{existing_target}”。",
+    "desktop.software.alias.confirm_rebind.title": "确认改绑习惯名",
+    "desktop.software.alias.confirm_rebind.body": "“{term}”当前绑定到“{existing_target}”。是否改绑到“{target}”？",
+    "desktop.software.alias.added": "已添加习惯名：“{term}”。",
+    "desktop.software.alias.deleted": "已删除习惯名：“{term}”。",
+    "desktop.software.alias.seed_read_only": "这是系统预置提示词，不能在这里删除。",
+    "desktop.software.alias.delete_confirm.title": "确认删除习惯名",
+    "desktop.software.alias.delete_confirm.body": "确定删除习惯名“{term}”吗？",
+    "desktop.software.alias.operation_failed": "操作未完成：{reason}"
+  }
+}

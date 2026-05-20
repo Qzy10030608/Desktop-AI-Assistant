@@ -1,0 +1,29 @@
+{
+  "schema_version": "file_terms_seed_v1",
+  "terms": [
+    {
+      "term": "项目说明",
+      "aliases": ["说明文档", "设计说明", "项目文档"],
+      "target_kind_hint": "document",
+      "source": "developer_seed",
+      "confidence": 0.6,
+      "enabled": true
+    },
+    {
+      "term": "结构图",
+      "aliases": ["连接图", "架构图", "流程图"],
+      "target_kind_hint": "document_or_image",
+      "source": "developer_seed",
+      "confidence": 0.6,
+      "enabled": true
+    },
+    {
+      "term": "修正版",
+      "aliases": ["新版", "最新版", "修改版"],
+      "target_kind_hint": "document",
+      "source": "developer_seed",
+      "confidence": 0.55,
+      "enabled": true
+    }
+  ]
+}

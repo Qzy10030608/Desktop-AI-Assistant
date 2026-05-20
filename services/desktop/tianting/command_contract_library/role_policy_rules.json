@@ -1,0 +1,19 @@
+{
+  "schema_version": "desktop_role_policy_rules_v1",
+  "roles": {
+    "normal_user": {
+      "can_use_connection_toggle": true,
+      "can_use_test_mode": false,
+      "can_see_debug_trace": false,
+      "yushitai_view": "summary",
+      "shaofu_view": "summary"
+    },
+    "developer": {
+      "can_use_connection_toggle": true,
+      "can_use_test_mode": true,
+      "can_see_debug_trace": true,
+      "yushitai_view": "full",
+      "shaofu_view": "full"
+    }
+  }
+}

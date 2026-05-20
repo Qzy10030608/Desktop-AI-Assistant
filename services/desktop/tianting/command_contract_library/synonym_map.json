@@ -1,0 +1,12 @@
+{
+  "schema_version": "desktop_synonym_map_v1",
+  "groups": {
+    "open": ["打开", "开启", "启动", "运行"],
+    "close": ["关闭", "关掉", "退出", "停止"],
+    "file": ["文件", "文档", "报告", "说明"],
+    "app": ["软件", "程序", "应用"],
+    "contextual_reference": ["刚才", "最近", "这个", "那个"],
+    "connection_enable": ["连接电脑", "桌面连接", "开启连接"],
+    "connection_disable": ["关闭连接", "关闭桌面连接", "断开连接"]
+  }
+}

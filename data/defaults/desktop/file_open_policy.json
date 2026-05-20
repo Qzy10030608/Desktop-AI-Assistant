@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "rules": {
+    ".txt": {
+      "preferred_app_kind": "notepad",
+      "fallback_app_kinds": ["vscode"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "notepad",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".md": {
+      "preferred_app_kind": "vscode",
+      "fallback_app_kinds": ["notepad"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "vscode",
+      "allow_windows_default": false,
+      "requires_user_choice": false
+    },
+    ".py": {
+      "preferred_app_kind": "vscode",
+      "fallback_app_kinds": ["notepad"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "vscode",
+      "allow_windows_default": false,
+      "requires_user_choice": false
+    },
+    ".json": {
+      "preferred_app_kind": "vscode",
+      "fallback_app_kinds": ["notepad"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "vscode",
+      "allow_windows_default": false,
+      "requires_user_choice": false
+    },
+    ".doc": {
+      "preferred_app_kind": "office_word",
+      "fallback_app_kinds": ["wps_writer"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "office_or_wps",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".docx": {
+      "preferred_app_kind": "office_word",
+      "fallback_app_kinds": ["wps_writer"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "office_or_wps",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".xls": {
+      "preferred_app_kind": "office_excel",
+      "fallback_app_kinds": ["wps_spreadsheet"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "office_or_wps",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".xlsx": {
+      "preferred_app_kind": "office_excel",
+      "fallback_app_kinds": ["wps_spreadsheet"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "office_or_wps",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".ppt": {
+      "preferred_app_kind": "office_powerpoint",
+      "fallback_app_kinds": ["wps_presentation"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "office_or_wps",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".pptx": {
+      "preferred_app_kind": "office_powerpoint",
+      "fallback_app_kinds": ["wps_presentation"],
+      "open_mode": "specified_app_first",
+      "close_adapter": "office_or_wps",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    ".pdf": {
+      "preferred_app_kind": "default_app",
+      "fallback_app_kinds": [],
+      "open_mode": "windows_default_allowed",
+      "close_adapter": "default_app",
+      "allow_windows_default": true,
+      "requires_user_choice": false
+    },
+    "no_extension": {
+      "preferred_app_kind": "vscode",
+      "fallback_app_kinds": ["notepad"],
+      "open_mode": "ask_or_specified_app",
+      "close_adapter": "vscode",
+      "allow_windows_default": false,
+      "requires_user_choice": true
+    }
+  }
+}

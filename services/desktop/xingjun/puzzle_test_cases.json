@@ -1,0 +1,99 @@
+[
+  {
+    "raw_user_text": "打开项目说明文档",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected_action": "file.open",
+    "expected": "file.open with multiple dry-run candidates or candidate request"
+  },
+  {
+    "raw_user_text": "打开昨天那个说明",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected_action": "file.open",
+    "expected": "candidate_search=true"
+  },
+  {
+    "raw_user_text": "启动浏览器",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected_action": "app.launch",
+    "expected": "default browser candidate"
+  },
+  {
+    "raw_user_text": "启动 Steam",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected_action": "app.launch",
+    "expected": "Steam candidate"
+  },
+  {
+    "raw_user_text": "关闭刚才那个文档",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected_action": "file.close",
+    "expected": "target material request"
+  },
+  {
+    "raw_user_text": "关闭 Steam",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected_action": "app.close",
+    "expected": "app.close target material or pending choice"
+  },
+  {
+    "raw_user_text": "打开项目说明文档",
+    "followup": "第一个",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected": "pending choice followup resolves first candidate"
+  },
+  {
+    "raw_user_text": "打开项目说明文档",
+    "followup": "取消",
+    "actor_role": "normal_user",
+    "input_channel": "text",
+    "expected": "pending choice followup cancels"
+  },
+  {
+    "raw_user_text": "你觉得这个设计怎么样",
+    "expected_route": "chat_reply",
+    "expected": "normal chat should continue to ChatWorker"
+  },
+  {
+    "raw_user_text": "打开英雄联盟",
+    "expected_route": "desktop_command",
+    "expected": "desktop command dry-run"
+  },
+  {
+    "raw_user_text": "打开新露谷",
+    "expected_route": "desktop_command_or_need_clarification",
+    "expected": "desktop command hint or clarification depending memory"
+  },
+  {
+    "raw_user_text": "第一个",
+    "expected_route": "pending_followup",
+    "expected": "only when a pending task exists"
+  },
+  {
+    "raw_user_text": "取消",
+    "expected_route": "pending_followup",
+    "expected": "only when a pending task exists"
+  },
+  {
+    "raw_user_text": "帮我弄一下那个",
+    "expected_route": "need_clarification",
+    "expected": "ask user which operation is intended"
+  },
+  {
+    "raw_user_text": "查一下 GPT-SoVITS",
+    "expected_route": "web_command_reserved",
+    "expected": "web/search reserved, provider disabled"
+  },
+  {
+    "raw_user_text": "显示 puzzle",
+    "actor_role": "developer",
+    "expected_route": "developer_command",
+    "expected": "developer route only, no real mode switch"
+  }
+]

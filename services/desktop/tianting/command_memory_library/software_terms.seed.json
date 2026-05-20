@@ -1,0 +1,45 @@
+{
+  "schema_version": "software_terms_seed_v1",
+  "terms": [
+    {
+      "term": "记事本",
+      "aliases": ["notepad", "windows notepad"],
+      "target_label_hint": "Notepad",
+      "source": "developer_seed",
+      "confidence": 0.8,
+      "enabled": true
+    },
+    {
+      "term": "画图",
+      "aliases": ["paint", "mspaint"],
+      "target_label_hint": "Paint",
+      "source": "developer_seed",
+      "confidence": 0.8,
+      "enabled": true
+    },
+    {
+      "term": "计算器",
+      "aliases": ["calculator", "calc"],
+      "target_label_hint": "Calculator",
+      "source": "developer_seed",
+      "confidence": 0.8,
+      "enabled": true
+    },
+    {
+      "term": "浏览器",
+      "aliases": ["browser", "edge", "chrome", "default browser"],
+      "target_label_hint": "Browser",
+      "source": "developer_seed",
+      "confidence": 0.65,
+      "enabled": true
+    },
+    {
+      "term": "代码",
+      "aliases": ["vscode", "visual studio code", "code"],
+      "target_label_hint": "Visual Studio Code",
+      "source": "developer_seed",
+      "confidence": 0.65,
+      "enabled": true
+    }
+  ]
+}

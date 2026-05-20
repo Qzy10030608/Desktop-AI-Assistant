@@ -1,0 +1,234 @@
+{
+  "schema_version": "desktop_language_profile_v1",
+  "locale": "en-US",
+  "command": {
+    "open_verbs": [
+      "open",
+      "start",
+      "launch",
+      "run"
+    ],
+    "close_verbs": [
+      "close",
+      "quit",
+      "exit",
+      "stop"
+    ],
+    "polite_fillers": [
+      "please",
+      "could you",
+      "can you",
+      "for me"
+    ],
+    "generic_app_words": [
+      "app",
+      "application",
+      "program",
+      "software",
+      "browser",
+      "notepad",
+      "paint",
+      "calculator",
+      "steam",
+      "vscode",
+      "code"
+    ],
+    "generic_file_words": [
+      "file",
+      "document",
+      "report",
+      "docx",
+      "doc",
+      "pdf",
+      "md",
+      "json",
+      "txt"
+    ],
+    "connection_words": {
+      "enable": [
+        "enable desktop connection",
+        "turn on desktop connection",
+        "connect to desktop"
+      ],
+      "disable": [
+        "disable desktop connection",
+        "turn off desktop connection",
+        "disconnect desktop"
+      ]
+    },
+    "chat_hint_words": [
+      "why",
+      "how",
+      "explain",
+      "what do you think",
+      "write",
+      "analyze"
+    ],
+    "math_chat_words": [
+      "equals",
+      "how much",
+      "what is"
+    ],
+    "unclear_patterns": [
+      "handle that",
+      "do that thing",
+      "take care of it"
+    ],
+    "web_words": [
+      "search",
+      "look up",
+      "open web page",
+      "web"
+    ],
+    "developer_words": [
+      "show puzzle",
+      "show dry-run",
+      "show task",
+      "view pending",
+      "switch sandbox",
+      "switch vm"
+    ]
+  },
+  "system_skill": {
+    "datetime": {
+      "time_queries": [
+        "what time is it",
+        "current time",
+        "time now"
+      ],
+      "date_queries": [
+        "what date is it",
+        "current date",
+        "today's date"
+      ],
+      "weekday_queries": [
+        "what day is it",
+        "what day of the week is it",
+        "weekday"
+      ]
+    },
+    "weather": {
+      "queries": [
+        "weather",
+        "will it rain",
+        "is it hot today"
+      ]
+    },
+    "calendar": {
+      "queries": [
+        "calendar",
+        "schedule",
+        "agenda"
+      ]
+    }
+  },
+  "pending": {
+    "confirm_words": [
+      "yes",
+      "y",
+      "confirm",
+      "open it",
+      "that's it",
+      "correct",
+      "ok",
+      "okay"
+    ],
+    "cancel_words": [
+      "cancel",
+      "no",
+      "nope",
+      "stop",
+      "never mind"
+    ],
+    "choice_words": [
+      "first",
+      "second",
+      "third",
+      "1",
+      "2",
+      "3",
+      "choose first",
+      "choose second",
+      "choose third",
+      "client",
+      "game",
+      "launcher",
+      "background"
+    ]
+  },
+  "reply": {
+    "desktop.generic.done": "Desktop operation completed.",
+    "desktop.generic.failed": "Desktop operation could not be completed.",
+    "desktop.generic.blocked": "The desktop operation was blocked.",
+    "desktop.generic.dry_run": "A test result was generated. No real desktop action was executed.",
+    "desktop.generic.candidate_ready": "A candidate was found and is waiting for the next step.",
+    "desktop.generic.pending_choice": "I found multiple candidates. Please choose one.",
+    "desktop.generic.need_clarification": "I need one more detail before continuing.",
+    "desktop.generic.need_confirmation": "Please confirm before I continue.",
+    "desktop.generic.choice_resolved": "The candidate has been selected.",
+    "desktop.generic.choice_cancelled": "The selection has been cancelled.",
+    "desktop.generic.choice_invalid": "The selection is invalid. Please choose again.",
+    "desktop.generic.choice_ambiguous": "The selection is not clear enough. Please choose by number.",
+    "desktop.generic.not_found": "No matching target was found.",
+    "desktop.generic.unknown": "The desktop operation has been handled.",
+    "desktop.connection.enabled": "Desktop connection has been enabled.",
+    "desktop.connection.disabled": "Desktop connection has been disabled.",
+    "desktop.connection.not_enabled": "Desktop connection is not enabled, so no real desktop action can be executed.",
+    "desktop.connection.not_execution_mode": "The current mode is not execution mode, so the real desktop action was blocked.",
+    "desktop.connection.test_mode_only": "The current mode is test mode. Only a test result was generated; no real action was executed.",
+    "desktop.app.launch.pending_choice": "I found multiple possible apps. Please choose one.",
+    "desktop.app.launch.need_confirmation": "Do you want to open \"{target}\"?",
+    "desktop.app.launch.need_permission": "I found \"{target}\", but it is not authorized yet. Please set its permission in the software area.",
+    "desktop.app.launch.not_found": "I could not find an executable object for \"{target}\" in software governance.",
+    "desktop.app.launch.need_clarification": "I am not sure which app you want to open. Please describe it more clearly, or choose from the candidates.",
+    "desktop.app.launch.candidate_ready": "The software object has been matched and is being reviewed by the Qin chain.",
+    "desktop.app.launch.request_sent": "Sent the launch request to Host: {target}.",
+    "desktop.app.launch.done": "The app launch request has been sent: {target}.",
+    "desktop.app.launch.failed": "The app launch request could not be completed: {target}.",
+    "desktop.app.launch.blocked": "The software launch was blocked.",
+    "desktop.app.launch.permission_unset": "The target is not authorized for execution yet. Please set its permission in the software governance area.",
+    "desktop.app.close.plan_ready": "The software close plan has been generated.",
+    "desktop.app.close.pending_choice": "I found multiple possible targets to close. Please choose one.",
+    "desktop.app.close.need_confirmation": "I am not fully sure which target to close. Do you want to close “{target}”?",
+    "desktop.app.close.choice_resolved": "The target to close has been selected.",
+    "desktop.app.close.choice_cancelled": "The close operation has been cancelled.",
+    "desktop.app.close.choice_invalid": "The close target selection is invalid. Please choose again.",
+    "desktop.app.close.not_found": "No running target software was found.",
+    "desktop.app.close.blocked": "The software close operation was blocked.",
+    "desktop.app.close.done": "The software has been closed: {target}.",
+    "desktop.app.close.failed": "Failed to close the software: {target}.",
+    "desktop.app.close.need_heibingtai": "Closing software requires Heibingtai target material. Direct close was refused.",
+    "desktop.file.open.pending_choice": "I found multiple possible files. Please choose which one to open.",
+    "desktop.file.open.need_confirmation": "I am not fully sure. Do you want to open “{target}”?",
+    "desktop.file.open.need_permission": "I found “{target}”, but it is not authorized to open. Please set permission in the file governance area.",
+    "desktop.file.open.not_found": "I could not find a file matching “{target}”. Please check the name or refresh the file list.",
+    "desktop.file.open.done": "File open request sent: {target}.",
+    "desktop.file.open.failed": "Failed to open file: {target}.",
+    "desktop.file.close.pending_choice": "I found multiple possible files to close. Please choose one.",
+    "desktop.file.close.need_confirmation": "I am not fully sure which file to close. Do you want to close “{target}”?",
+    "desktop.file.close.not_found": "No open target file was found.",
+    "desktop.file.close.done": "The file has been closed: {target}.",
+    "desktop.file.close.failed": "Failed to close file: {target}.",
+    "desktop.folder.open.pending_choice": "I found multiple possible folders. Please choose which one to open.",
+    "desktop.folder.open.not_found": "I could not find a matching folder. Please check the name or refresh the list.",
+    "desktop.folder.open.done": "Folder open request sent: {target}.",
+    "desktop.folder.open.failed": "Failed to open folder: {target}.",
+    "desktop.folder.close.pending_choice": "I found multiple possible folder windows to close. Please choose one.",
+    "desktop.folder.close.not_found": "No open target folder window was found.",
+    "desktop.folder.close.done": "The folder window has been closed: {target}.",
+    "desktop.folder.close.failed": "Failed to close folder window: {target}.",
+    "desktop.web.reserved": "Web search is reserved and is not enabled in this version.",
+    "desktop.ui.action.confirm_open": "Confirm open",
+    "desktop.ui.action.cancel": "Cancel",
+    "desktop.ui.action.choose_first": "Choose first",
+    "desktop.capture.reserved": "Screenshot and screen recording are reserved, but they are not enabled in the current version.",
+    "desktop.system.datetime.done": "{result}",
+    "desktop.system.weather.not_configured": "Weather is not connected yet. Please configure a default city or weather service first.",
+    "desktop.system.calendar.need_permission": "Calendar reading requires authorization first."
+  },
+  "ui": {
+    "desktop.ui.action.confirm_open": "Confirm open",
+    "desktop.ui.action.cancel": "Cancel",
+    "desktop.ui.action.choose_first": "Choose first"
+  }
+}

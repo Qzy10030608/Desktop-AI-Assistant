@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "generation": "reserved_for_v2",
+  "actions": ["browser.search", "web.search", "web.open_page", "web.summarize_results"],
+  "note": "Web/Search will be implemented as plugin in V2 and must still go through Qin review."
+}
