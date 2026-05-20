@@ -204,7 +204,8 @@ Edge-TTS 是轻量语音输出方案，适合作为默认或备用 TTS 出口。
 
 GPT-SoVITS 当前作为外部 TTS 服务接入。本仓库不包含 GPT-SoVITS 工程、模型权重、参考音频和本机路径配置。
 
-推荐连接链路：
+推荐连接链路：GPT-SoVITS 官方仓库：[RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
+本仓库只负责连接已经启动的 GPT-SoVITS API，不包含 GPT-SoVITS 源码、模型权重、参考音频或训练素材。
 
 ```text
 小助理 Demo
