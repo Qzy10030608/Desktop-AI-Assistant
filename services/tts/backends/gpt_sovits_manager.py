@@ -49,7 +49,9 @@ class GPTSoVITSManager:
         if not self.root_dir.is_dir():
             raise NotADirectoryError(f"GPT-SoVITS 根路径不是文件夹：{self.root_dir}")
 
-        script_path = self.root_dir / self.api_script
+        script_path = Path(self.api_script)
+        if not script_path.is_absolute():
+            script_path = self.root_dir / script_path
         if not script_path.exists():
             raise FileNotFoundError(f"找不到启动脚本：{script_path}")
 
@@ -69,10 +71,12 @@ class GPTSoVITSManager:
 
         self._validate_paths()
 
-        script_path = self.root_dir / self.api_script
+        script_path = Path(self.api_script)
+        if not script_path.is_absolute():
+            script_path = self.root_dir / script_path
         cmd = [self.python_exe, str(script_path), "-a", self.host, "-p", str(self.port)]
 
-        if self.api_script == "api_v2.py" and self.tts_config_path:
+        if script_path.name == "api_v2.py" and self.tts_config_path:
             cmd += ["-c", self.tts_config_path]
 
         log_dir = self.root_dir / "logs"

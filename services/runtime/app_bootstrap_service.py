@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass
 from typing import Any, Dict
 
@@ -39,6 +40,8 @@ class AppBootstrapService:
         ensure_local_data_files()
 
     def bootstrap(self) -> AppBootstrapBundle:
+        started = time.perf_counter()
+        print("[StartupPerf] bootstrap_start")
         ensure_project_dirs()
         self._prepare_desktop_local_scaffold()
 
@@ -46,7 +49,12 @@ class AppBootstrapService:
         startup_check_service = StartupCheckService(
             machine_profile_service=machine_profile_service
         )
-        startup_report = startup_check_service.run(auto_patch=False)
+        startup_report = startup_check_service.run(
+            auto_patch=False,
+            check_ollama=True,
+            check_gpt_sovits=False,
+            ollama_timeout=(0.5, 1.5),
+        )
 
         llm_backend_controller = LLMBackendControllerService()
 
@@ -56,6 +64,7 @@ class AppBootstrapService:
         temp_cleanup_service.ensure_temp_dirs()
 
         session_service = SessionService()
+        print(f"[StartupPerf] bootstrap_done ms={(time.perf_counter() - started) * 1000.0:.2f}")
 
         return AppBootstrapBundle(
             machine_profile_service=machine_profile_service,

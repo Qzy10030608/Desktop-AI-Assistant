@@ -38,12 +38,13 @@ class StartupCheckService:
             result.append(value)
         return result
 
-    def _check_ollama(self, host: str) -> Dict[str, Any]:
+    def _check_ollama(self, host: str, timeout: tuple | None = None) -> Dict[str, Any]:
         host = str(host or "").strip() or "http://localhost:11434"
         url = host.rstrip("/") + "/api/tags"
+        request_timeout = timeout or (2, 6)
 
         try:
-            resp = requests.get(url, timeout=(2, 6))
+            resp = requests.get(url, timeout=request_timeout)
             resp.raise_for_status()
             data = resp.json() if resp.content else {}
             models = data.get("models", []) if isinstance(data, dict) else []
@@ -190,14 +191,54 @@ class StartupCheckService:
             "error": inspected_results[0].get("error", "未找到可用 GPT-SoVITS 路径") if inspected_results else "未找到可用 GPT-SoVITS 路径",
         }
 
-    def run(self, auto_patch: bool = True) -> Dict[str, Any]:
+    def run(
+        self,
+        auto_patch: bool = True,
+        check_ollama: bool = True,
+        check_gpt_sovits: bool = True,
+        ollama_timeout: tuple | None = None,
+    ) -> Dict[str, Any]:
+        started = time.perf_counter()
+        print(
+            "[StartupPerf] startup_check_start "
+            f"check_ollama={check_ollama} "
+            f"check_gpt_sovits={check_gpt_sovits} "
+            f"ollama_timeout={ollama_timeout or '(2, 6)'}"
+        )
         checked_at = self._timestamp()
 
         ollama_cfg = self.machine_profile_service.get_ollama_config()
         gpt_cfg = self.machine_profile_service.get_gpt_sovits_config()
 
-        ollama_report = self._check_ollama(ollama_cfg.get("host", "http://localhost:11434"))
-        gpt_report = self._check_gpt_sovits(gpt_cfg)
+        if check_ollama:
+            ollama_report = self._check_ollama(
+                ollama_cfg.get("host", "http://localhost:11434"),
+                timeout=ollama_timeout,
+            )
+        else:
+            ollama_report = {
+                "ok": False,
+                "host": ollama_cfg.get("host", "http://localhost:11434"),
+                "model_count": 0,
+                "error": "skipped",
+                "skipped": True,
+            }
+
+        if check_gpt_sovits:
+            gpt_report = self._check_gpt_sovits(gpt_cfg)
+        else:
+            gpt_report = {
+                "ok": bool(gpt_cfg.get("last_health_ok", False)),
+                "configured_root": str(gpt_cfg.get("root_dir", "")).strip(),
+                "resolved_root_dir": "",
+                "python_exe": str(gpt_cfg.get("python_exe", "")).strip(),
+                "api_script_path": "",
+                "tts_config_path": "",
+                "checked_candidates": [],
+                "error": str(gpt_cfg.get("last_error", "")).strip(),
+                "skipped": True,
+                "skip_reason": "startup_deferred",
+            }
 
         auto_patched_profile = False
 
@@ -216,17 +257,20 @@ class StartupCheckService:
             ok=bool(ollama_report.get("ok", False)),
             error=str(ollama_report.get("error", "")).strip(),
         )
-        self.machine_profile_service.set_gpt_sovits_health(
-            ok=bool(gpt_report.get("ok", False)),
-            error=str(gpt_report.get("error", "")).strip(),
-        )
+        if check_gpt_sovits:
+            self.machine_profile_service.set_gpt_sovits_health(
+                ok=bool(gpt_report.get("ok", False)),
+                error=str(gpt_report.get("error", "")).strip(),
+            )
 
         startup_status = "ok" if ollama_report.get("ok") else "warning"
         self.machine_profile_service.set_startup_status(startup_status, checked_at)
 
-        return {
+        result = {
             "checked_at": checked_at,
             "auto_patched_profile": auto_patched_profile,
             "ollama": ollama_report,
             "gpt_sovits": gpt_report,
         }
+        print(f"[StartupPerf] startup_check_done ms={(time.perf_counter() - started) * 1000.0:.2f}")
+        return result

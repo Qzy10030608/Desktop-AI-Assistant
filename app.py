@@ -1,4 +1,5 @@
 import sys
+import time
 
 from PySide6.QtCore import QObject, Qt, Signal, QThread, QTimer
 from PySide6.QtWidgets import QApplication
@@ -68,6 +69,23 @@ class StartupTTSPrepareWorker(QObject):
             self.finished.emit(result)
         except Exception as e:
             self.error.emit(str(e))
+
+
+class StartupTTSConnectWorker(QObject):
+    finished = Signal(dict)
+    error = Signal(str)
+
+    def __init__(self, tts_backend_controller, backend: str):
+        super().__init__()
+        self.tts_backend_controller = tts_backend_controller
+        self.backend = backend
+
+    def run(self):
+        try:
+            result = self.tts_backend_controller.ensure_backend_ready(self.backend)
+            self.finished.emit(result)
+        except Exception as e:
+            self.error.emit(str(e))
             
 # =========================
 # 主控制器
@@ -78,6 +96,8 @@ class DesktopAIController(QObject):
     """
     def __init__(self):
         super().__init__()
+        controller_started = time.perf_counter()
+        self.tts_startup_policy = "connect"
         self.app_bootstrap_service = AppBootstrapService()
         bootstrap_bundle = self.app_bootstrap_service.bootstrap()
 
@@ -119,6 +139,8 @@ class DesktopAIController(QObject):
         self._is_exiting = False
         self.startup_tts_thread = None
         self.startup_tts_worker = None
+        self.startup_tts_connect_thread = None
+        self.startup_tts_connect_worker = None
         
         self.reply_pipeline_service = ReplyPipelineService()
         self.reply_pipeline_window = None
@@ -183,7 +205,15 @@ class DesktopAIController(QObject):
 
         self.bind_signals()
         self.sync_runtime_state_to_main_window()
-        QTimer.singleShot(600, self.prepare_tts_backend_after_startup)
+        if self.tts_startup_policy == "preload":
+            QTimer.singleShot(600, self.prepare_tts_backend_after_startup)
+        elif self.tts_startup_policy == "connect":
+            QTimer.singleShot(1000, self.connect_tts_backend_after_startup)
+        else:
+            backend = self.voice_profile_service.get_current_tts_backend()
+            if hasattr(self.window, "set_tts_runtime_status"):
+                self.window.set_tts_runtime_status("按需连接" if backend == "gpt_sovits" else "无需连接")
+        print(f"[StartupPerf] controller_init_done ms={(time.perf_counter() - controller_started) * 1000.0:.2f}")
     def _on_control_center_destroyed(self):
         self.control_center_window = None
 
@@ -520,6 +550,82 @@ class DesktopAIController(QObject):
     # =========================
     # TTS 结果
     # =========================
+    def connect_tts_backend_after_startup(self):
+        backend = self.voice_profile_service.get_current_tts_backend()
+
+        if backend != "gpt_sovits":
+            if hasattr(self.window, "set_tts_runtime_status"):
+                self.window.set_tts_runtime_status("无需连接")
+            return
+
+        if self.startup_tts_connect_thread is not None and self.startup_tts_connect_thread.isRunning():
+            return
+
+        if hasattr(self.window, "set_tts_runtime_status"):
+            self.window.set_tts_runtime_status("连接中")
+        self.window.set_status("正在后台连接 GPT-SoVITS 服务...", temporary=True)
+        self._refresh_control_center_tts_status()
+        self._schedule_control_center_tts_status_refresh()
+
+        self.startup_tts_connect_thread = QThread(self)
+        self.startup_tts_connect_worker = StartupTTSConnectWorker(
+            tts_backend_controller=self.tts_backend_controller,
+            backend=backend,
+        )
+        self.startup_tts_connect_worker.moveToThread(self.startup_tts_connect_thread)
+
+        self.startup_tts_connect_thread.started.connect(self.startup_tts_connect_worker.run)
+        self.startup_tts_connect_worker.finished.connect(self._on_startup_tts_connect_finished)
+        self.startup_tts_connect_worker.error.connect(self._on_startup_tts_connect_error)
+
+        self.startup_tts_connect_worker.finished.connect(self.startup_tts_connect_thread.quit)
+        self.startup_tts_connect_worker.error.connect(self.startup_tts_connect_thread.quit)
+        self.startup_tts_connect_worker.finished.connect(self.startup_tts_connect_worker.deleteLater)
+        self.startup_tts_connect_worker.error.connect(self.startup_tts_connect_worker.deleteLater)
+        self.startup_tts_connect_thread.finished.connect(self._on_startup_tts_connect_thread_finished)
+        self.startup_tts_connect_thread.finished.connect(self.startup_tts_connect_thread.deleteLater)
+
+        self.startup_tts_connect_thread.start()
+
+    def _on_startup_tts_connect_finished(self, result: dict):
+        healthy = bool(result.get("healthy", False))
+        message = str(result.get("message", "")).strip()
+
+        if healthy:
+            if hasattr(self.window, "set_tts_runtime_status"):
+                self.window.set_tts_runtime_status("已连接")
+            self.window.set_status(message or "GPT-SoVITS 服务已连接", temporary=True)
+        else:
+            if hasattr(self.window, "set_tts_runtime_status"):
+                self.window.set_tts_runtime_status("按需连接")
+            self.window.set_status(message or "GPT-SoVITS 服务未就绪，将在首次合成时继续尝试", temporary=True)
+
+        self._refresh_control_center_tts_status()
+
+    def _on_startup_tts_connect_error(self, message: str):
+        if hasattr(self.window, "set_tts_runtime_status"):
+            self.window.set_tts_runtime_status("按需连接")
+        self.window.set_status(f"GPT-SoVITS 后台连接未完成：{message}", temporary=True)
+        self._refresh_control_center_tts_status()
+
+    def _on_startup_tts_connect_thread_finished(self):
+        self.startup_tts_connect_thread = None
+        self.startup_tts_connect_worker = None
+
+    def _refresh_control_center_tts_status(self):
+        cc = getattr(self, "control_center_window", None)
+        if cc is not None and hasattr(cc, "refresh_tts_backend_status"):
+            try:
+                cc.refresh_tts_backend_status()
+            except Exception:
+                pass
+
+    def _schedule_control_center_tts_status_refresh(self):
+        QTimer.singleShot(2000, self._refresh_control_center_tts_status)
+        QTimer.singleShot(5000, self._refresh_control_center_tts_status)
+        QTimer.singleShot(10000, self._refresh_control_center_tts_status)
+        QTimer.singleShot(25000, self._refresh_control_center_tts_status)
+
     def prepare_tts_backend_after_startup(self):
         backend = self.voice_profile_service.get_current_tts_backend()
 
@@ -720,7 +826,15 @@ class DesktopAIController(QObject):
         else:
             self.window.set_status(f"控制中心设置已应用，但当前聊天不可用：{error_text}")
 
-        QTimer.singleShot(200, self.prepare_tts_backend_after_startup)
+        tts_startup_policy = getattr(self, "tts_startup_policy", "connect")
+        if tts_startup_policy == "preload":
+            QTimer.singleShot(200, self.prepare_tts_backend_after_startup)
+        elif tts_startup_policy == "connect":
+            QTimer.singleShot(200, self.connect_tts_backend_after_startup)
+        else:
+            backend = self.voice_profile_service.get_current_tts_backend()
+            if hasattr(self.window, "set_tts_runtime_status"):
+                self.window.set_tts_runtime_status("按需连接" if backend == "gpt_sovits" else "无需连接")
 
     def on_control_center_state_changed(self, state: dict):
         role_name = state.get("role", "-")
@@ -753,9 +867,11 @@ class DesktopAIController(QObject):
         self.window.set_runtime_state_summary(summary)
 
 def main():
+    app_started = time.perf_counter()
     app = QApplication(sys.argv)
     controller = DesktopAIController()
     app.aboutToQuit.connect(controller.close_yushitai_run)
+    print(f"[StartupPerf] window_show_ready ms={(time.perf_counter() - app_started) * 1000.0:.2f}")
     controller.show()
     sys.exit(app.exec())
 

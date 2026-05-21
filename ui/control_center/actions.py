@@ -38,7 +38,10 @@ class _TTSBackendLoadWorker(QObject):
 
     def run(self):
         try:
-            status = self.controller.ensure_backend_ready(self.backend)
+            if str(self.backend or "").strip().lower() == "gpt_sovits":
+                status = self.controller.get_backend_status(self.backend)
+            else:
+                status = self.controller.ensure_backend_ready(self.backend)
             self.finished.emit(status)
         except Exception as e:
             self.error.emit(str(e))
@@ -1611,7 +1614,28 @@ class ControlCenterActions:
             self.hide_tts_loading_inline()
             return
 
+        if backend == "gpt_sovits":
+            self._mark_tts_backend_pending()
+            return
+
         self._mark_tts_backend_error()
+
+    def _refresh_gpt_sovits_status_if_current(self):
+        if self._get_selected_tts_backend() != "gpt_sovits":
+            return
+
+        try:
+            status = self.w.tts_backend_controller.get_backend_status("gpt_sovits")
+            self.update_tts_backend_indicator(status)
+            if status.get("healthy"):
+                self._notify_main_tts_status("GPT-SoVITS 服务已连接")
+        except Exception:
+            self._mark_tts_backend_error()
+
+    def _schedule_gpt_sovits_status_refresh(self):
+        QTimer.singleShot(500, self._refresh_gpt_sovits_status_if_current)
+        QTimer.singleShot(1500, self._refresh_gpt_sovits_status_if_current)
+        QTimer.singleShot(3500, self._refresh_gpt_sovits_status_if_current)
 
     def refresh_tts_backend_status(self):
         backend = self._get_selected_tts_backend()
@@ -1733,6 +1757,15 @@ class ControlCenterActions:
             self._set_tts_apply_busy(False)
             return
 
+        if backend == "gpt_sovits":
+            package = self._get_selected_tts_package()
+            package_id = str(package.get("id", "")).strip()
+            ok, err, _runtime_cfg = self._validate_tts_package_before_apply(backend, package_id)
+            if not ok:
+                self._mark_tts_backend_error()
+                QMessageBox.warning(self.w, "语音包无效", f"当前 GPT-SoVITS 语音包无法应用：\n{err}")
+                return
+
         self._tts_apply_token += 1
         self._set_tts_apply_busy(True)
 
@@ -1765,13 +1798,18 @@ class ControlCenterActions:
         try:
             backend = str(status.get("backend") or self._get_selected_tts_backend()).strip().lower()
 
-            self.update_tts_loading_inline(f"{backend} 已连接，正在保存配置…", 70)
+            if backend == "gpt_sovits" and not status.get("healthy"):
+                self.update_tts_loading_inline("GPT-SoVITS 配置已检查，正在保存按需连接设置…", 70)
+            else:
+                self.update_tts_loading_inline(f"{backend} 已连接，正在保存配置…", 70)
 
             self._persist_selected_tts_backend_lightweight()
             self._sync_valid_tts_package_for_backend(backend)
 
             self.update_tts_loading_inline("加载完成，正在刷新界面…", 90)
 
+            if backend == "gpt_sovits":
+                status = self.w.tts_backend_controller.get_backend_status("gpt_sovits")
             self.update_tts_backend_indicator(status)
 
             try:
@@ -1800,7 +1838,10 @@ class ControlCenterActions:
             except Exception:
                 pass
 
-            self._start_gpt_sovits_preload_after_apply()
+            if backend == "gpt_sovits" and not status.get("healthy"):
+                detail = str(status.get("message", "")).strip() or "服务将在语音测试或首次合成时启动"
+                self._notify_main_tts_status(f"GPT-SoVITS 已保存为按需连接：{detail}")
+                self._schedule_gpt_sovits_status_refresh()
 
     def _on_tts_backend_load_failed(self, msg: str):
         try:
@@ -2434,38 +2475,24 @@ class ControlCenterActions:
         backend = self._get_selected_tts_backend()
 
         if backend != "gpt_sovits":
-            self._notify_main_tts_status("当前语音后端无需预加载")
+            self._notify_main_tts_status("当前语音后端无需连接")
             return
 
         if self._tts_preload_thread is not None and self._tts_preload_thread.isRunning():
-            self.update_tts_loading_inline("GPT-SoVITS 预加载中，请稍候…", 20)
-            self._notify_main_tts_status("GPT-SoVITS 正在连接中…")
+            self.update_tts_loading_inline("GPT-SoVITS 正在准备中，请稍候", 20)
+            self._notify_main_tts_status("GPT-SoVITS 正在连接中")
             return
 
-        self.show_tts_loading_inline("正在预加载 GPT-SoVITS…", 5)
-        self._notify_main_tts_status("正在连接 GPT-SoVITS…")
-
-        self._tts_preload_thread = QThread(self.w)
-        self._tts_preload_worker = _TTSBackendPreloadWorker(
-            self.w.tts_backend_controller,
-            self.w.voice_service,
-            self.w.tts_package_service,
-        )
-        self._tts_preload_worker.moveToThread(self._tts_preload_thread)
-
-        self._tts_preload_thread.started.connect(self._tts_preload_worker.run)
-        self._tts_preload_worker.progress.connect(self.update_tts_loading_inline)
-
-        self._tts_preload_worker.finished.connect(self._on_tts_backend_preload_finished)
-        self._tts_preload_worker.error.connect(self._on_tts_backend_preload_failed)
-
-        self._tts_preload_worker.finished.connect(self._tts_preload_thread.quit)
-        self._tts_preload_worker.error.connect(self._tts_preload_thread.quit)
-        self._tts_preload_worker.finished.connect(self._tts_preload_worker.deleteLater)
-        self._tts_preload_worker.error.connect(self._tts_preload_worker.deleteLater)
-        self._tts_preload_thread.finished.connect(self._tts_preload_thread.deleteLater)
-
-        self._tts_preload_thread.start()
+        try:
+            status = self.w.tts_backend_controller.get_backend_status("gpt_sovits")
+            self.update_tts_backend_indicator(status)
+            if status.get("healthy"):
+                self._notify_main_tts_status("GPT-SoVITS 服务已连接")
+            else:
+                self._notify_main_tts_status(str(status.get("message", "GPT-SoVITS 按需连接")))
+        except Exception as exc:
+            self._mark_tts_backend_error()
+            self._notify_main_tts_status(f"GPT-SoVITS 配置检查失败：{exc}")
 
     def _on_tts_backend_preload_finished(self, result: dict):
         try:
